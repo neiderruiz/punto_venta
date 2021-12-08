@@ -1,7 +1,40 @@
 .login-container{
     height: 100vh;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnGNxAaOc21nmToCP4VATgblre23_4ttNZag&usqp=CAU");
     background-size: cover;
-    background-attachment: fixed;
+    background: #fff ;
+
+
+}
+
+.color{
+background: #fff;
+}
+
+.header{
+  width: 100%;
+  background: #699D9C;
+  height: 70px;
+}
+
+.titulo{
+color: white;
+font-size: 30px;
+font-family: Arial, sans-serif;
+font-weight: bold;
+text-align:center;
+padding:10px;
+}
+
+.bcolor{
+  background: #347675;
+  color: white;
+}
+
+.bcolor:hover{
+  background: #3FA8A6;
+  color: white;
+}
+
+.posision{
 
 }
