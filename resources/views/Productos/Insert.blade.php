@@ -42,24 +42,43 @@
     </table>
   </div>
 <div class="modal" id="modalInsert">
-    <form action="{{ route('productos.post') }}" method="post" enctype="multipart/form">
+    <form role="form" action="{{ route('productos.post') }}" method="post" enctype="multipart/form">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Crear producto</h4>
+          <h4 class="modal-title">Nuevo producto</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-                <label for="nombre">nombre producto:</label>
-                <input type="text" class="form-control" placeholder="Coca Cola" id="nombre" name="nombre">
-                <label for="descripcion">descripción producto:</label>
-                <textarea type="text" class="form-control"  id="descripcion" name="descripcion"></textarea>
-                <label for="precio">precio producto:</label>
-                <input type="number" class="form-control" placeholder="15"  id="precio" name="precio">
-                <label for="Contenido">Contenido producto:</label>
-                <input type="text" class="form-control" placeholder="" id="contenido" name="contenido"/>
-                <label for="cantidad">Cantidad producto:</label>
-                <input type="number" class="form-control" placeholder="15"  id="cantidad" name="cantidad">
+                <label for="nombre">Nombre del producto:</label>
+                <input type="text" class="form-control" placeholder="Coca Cola" id="nombre" name="nombre" value="{{old('nombre')}}">
+                @if($errors->first('nombre'))
+    				        <p class="text-danger">{{$errors->first('nombre')}}</p>
+    				    @endif
+
+                <label for="descripcion">Descripción:</label>
+                <textarea type="text" class="form-control"  id="descripcion" name="descripcion" value="{{old('descripcion')}}"></textarea>
+                @if($errors->first('descripcion'))
+    				        <p class="text-danger">{{$errors->first('descripcion')}}</p>
+    				    @endif
+
+                <label for="precio">Precio:</label>
+                <input type="number" class="form-control" placeholder="15" step="0.01"  id="precio" name="precio" value="{{old('precio')}}">
+                @if($errors->first('precio'))
+    				        <p class="text-danger">{{$errors->first('precio')}}</p>
+    				    @endif
+
+                <label for="Contenido">Contenido:</label>
+                <input type="text" class="form-control" placeholder="" id="contenido" name="contenido" value="{{old('contenido')}}">
+                @if($errors->first('contenido'))
+    				        <p class="text-danger">{{$errors->first('contenido')}}</p>
+    				    @endif
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" class="form-control" placeholder="15"  id="cantidad" name="cantidad" value="{{old('cantidad')}}">
+                @if($errors->first('cantidad'))
+    				        <p class="text-danger">{{$errors->first('cantidad')}}</p>
+    				    @endif
 
         </div>
         <div class="modal-footer">
@@ -82,17 +101,36 @@
         </div>
         <div class="modal-body">
             <input type="hidden" name="id" id="id">
-                <label for="nombre">nombre producto:</label>
-                <input type="text" class="form-control" placeholder="Coca Cola" id="nombre" name="nombre">
-                <label for="descripcion">descripción producto:</label>
-                <textarea type="text" class="form-control" placeholder="Coca Cola" id="descripcion" name="descripcion">
-                </textarea>
-                <label for="precio">precio producto:</label>
-                <input type="number" class="form-control" placeholder="12.5"  id="precio" name="precio">
-                <label for="Contenido">Contenido producto:</label>
-                <input type="text" class="form-control" placeholder="" id="contenido" name="contenido"/>
-                <label for="cantidad">Cantidad producto:</label>
-                <input type="number" class="form-control" placeholder="15"  id="cantidad" name="cantidad">
+
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" class="form-control" placeholder="Coca Cola" id="nombre" name="nombre" value="{{old('nombre')}}">
+            @if($errors->first('nombre'))
+                <p class="text-danger">{{$errors->first('nombre')}}</p>
+            @endif
+
+            <label for="descripcion">Descripción:</label>
+            <textarea type="text" class="form-control"  id="descripcion" name="descripcion" value="{{old('descripcion')}}"></textarea>
+            @if($errors->first('descripcion'))
+                <p class="text-danger">{{$errors->first('descripcion')}}</p>
+            @endif
+
+            <label for="precio">Precio:</label>
+            <input type="number" class="form-control" placeholder="15" step="0.01"  id="precio" name="precio" value="{{old('precio')}}">
+            @if($errors->first('precio'))
+                <p class="text-danger">{{$errors->first('precio')}}</p>
+            @endif
+
+            <label for="Contenido">Contenido:</label>
+            <input type="text" class="form-control" placeholder="" id="contenido" name="contenido" value="{{old('contenido')}}">
+            @if($errors->first('contenido'))
+                <p class="text-danger">{{$errors->first('contenido')}}</p>
+            @endif
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" class="form-control" placeholder="15"  id="cantidad" name="cantidad" value="{{old('cantidad')}}">
+            @if($errors->first('cantidad'))
+                <p class="text-danger">{{$errors->first('cantidad')}}</p>
+            @endif
 
 
             </div>
@@ -110,4 +148,12 @@
   @endsection
 @section('Scripts')
 <script src="{{asset('Scripts/Productos/producto-1.0.js')}}"></script>
+
+@if($errors->any())
+    <script>
+        $('#modalInsert').modal('show');
+    </script>
+    @endif
+
+  
 @endsection

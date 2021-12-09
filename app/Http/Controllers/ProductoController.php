@@ -37,6 +37,16 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
 
+      $this->validate($request,[
+          //los nombres son los de los name de las inputs de la vista.
+        'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
+        'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
+        'precio' => 'required|numeric',
+        'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
+        'cantidad' => 'required|numeric'
+        //'idd' => 'required|numeric'
+        ]);
+
         $producto= new Producto();
         $producto->nombre=$request->nombre;
         $producto->descripcion=$request->descripcion;
@@ -79,6 +89,16 @@ class ProductoController extends Controller
      */
     public function update(Request $request)
     {
+      $this->validate($request,[
+          //los nombres son los de los name de las inputs de la vista.
+        'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
+        'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
+        'precio' => 'required|numeric',
+        'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
+        'cantidad' => 'required|numeric'
+        //'idd' => 'required|numeric'
+        ]);
+        
         $producto= Producto::findOrFail($request->id);
         $producto->update($request->all());
        return redirect('/productos');
