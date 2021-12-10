@@ -14,8 +14,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos=Producto::all();
-        return view("Productos.Insert",['productos'=>$productos]);
+        $productos = Producto::all();
+        return view("Productos.Insert", ['productos' => $productos]);
     }
 
     /**
@@ -36,27 +36,27 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-
-      $this->validate($request,[
-          //los nombres son los de los name de las inputs de la vista.
-        'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
-        'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
-        'precio' => 'required|numeric',
-        'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
-        'cantidad' => 'required|numeric'
-        //'idd' => 'required|numeric'
+        session()->flash('message', 'created');
+        $this->validate($request, [
+            //los nombres son los de los name de las inputs de la vista.
+            'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
+            'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
+            'precio' => 'required|numeric',
+            'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
+            'cantidad' => 'required|numeric'
+            //'idd' => 'required|numeric'
         ]);
 
-        $producto= new Producto();
-        $producto->nombre=$request->nombre;
-        $producto->descripcion=$request->descripcion;
-        $producto->precio=$request->precio;
-        $producto->cantidad=$request->cantidad;
-        $producto->contenido=$request->contenido;
+        $producto = new Producto();
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->cantidad = $request->cantidad;
+        $producto->contenido = $request->contenido;
 
 
-     $producto->save();
-     return redirect('/productos');
+        $producto->save();
+        return redirect('/productos');
     }
 
     /**
@@ -78,7 +78,6 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -89,19 +88,20 @@ class ProductoController extends Controller
      */
     public function update(Request $request)
     {
-      $this->validate($request,[
-          //los nombres son los de los name de las inputs de la vista.
-        'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
-        'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
-        'precio' => 'required|numeric',
-        'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
-        'cantidad' => 'required|numeric'
-        //'idd' => 'required|numeric'
+        session()->flash('message', 'updated');
+        $this->validate($request, [
+            //los nombres son los de los name de las inputs de la vista.
+            'nombre' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:3,100',
+            'descripcion' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:5,250',
+            'precio' => 'required|numeric',
+            'contenido' => 'required|regex:/^[A-Z0-9,.,a-z, ,á,é,í,ó,ú,ü,ñ,Ñ]+$/|between:2,100',
+            'cantidad' => 'required|numeric'
+            //'idd' => 'required|numeric'
         ]);
-        
-        $producto= Producto::findOrFail($request->id);
+
+        $producto = Producto::findOrFail($request->id);
         $producto->update($request->all());
-       return redirect('/productos');
+        return redirect('/productos');
     }
 
     /**
@@ -112,8 +112,8 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        $producto= Producto::findOrFail($id);
+        $producto = Producto::findOrFail($id);
         $producto->delete();
-       return redirect('/productos');
+        return redirect('/productos');
     }
 }
